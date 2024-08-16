@@ -1,40 +1,52 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, request, send_file, render_template
+import json
 import os
 from waitress import serve
 
 app = Flask(__name__)
 
-# Define the structure of the .gate file based on the selected grid
-def generate_gate_file(name, size, grid_data):
-    gate_content = f"""
-# {name} Gate Configuration
-name: {name}
-size: {size}
-"""
-    for row in grid_data:
-        gate_content += ' '.join(row) + '\n'
-
-    file_name = f"{name}.gate"
-    with open(file_name, 'w') as file:
-        file.write(gate_content.strip())
-    return file_name
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        # Retrieve form data
-        name = request.form['name']
-        size = int(request.form['size'])
-        grid_data = request.form.getlist('grid_data[]')
+        # Debugging print statements
+        print("Received POST request")
+        print(f"Form data: {request.form}")
 
-        # Generate .gate file
-        gate_file = generate_gate_file(name, size, grid_data)
+        try:
+            name = request.form['name']
+            grid_data = request.form['grid_data']
+            width = int(request.form['width'])
+            height = int(request.form['height'])
 
-        # Send the file to the user for download
-        return send_file(gate_file, as_attachment=True)
+            # Debugging print statements
+            print(f"Name: {name}")
+            print(f"Width: {width}, Height: {height}")
+            print(f"Grid data: {grid_data}")
+
+            grid = json.loads(grid_data)
+            if not isinstance(grid, list) or not all(isinstance(row, list) for row in grid):
+                raise ValueError('Invalid grid data')
+
+            # Generate .gate file content
+            gate_content = f"Width: {width}\nHeight: {height}\n"
+            for row in grid:
+                gate_content += ' '.join(row) + '\n'
+
+            # Save the content to a .gate file
+            gate_filename = f"{name}.gate"
+            with open(gate_filename, 'w') as file:
+                file.write(gate_content)
+
+            return send_file(gate_filename, as_attachment=True)
+
+        except KeyError as e:
+            return f"Missing data: {e}", 400
+        except (json.JSONDecodeError, ValueError) as e:
+            return f"Error: {e}", 400
 
     return render_template('index.html')
 
+
 if __name__ == '__main__':
-    # Serve the application using Waitress
-    serve(app, host='0.0.0.0', port=8000)
+    serve(app, host='0.0.0.0', port=8002)

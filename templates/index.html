@@ -3,25 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create .gate File</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Gate Creator</title>
+    <style>
+        /* Add your CSS here */
+        .grid-container {
+            display: grid;
+        }
+        .grid-cell {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #000;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-    <h1>Create .gate File</h1>
     <form id="gate-form" action="/" method="POST">
         <label for="name">Gate Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
-        <label for="size">Grid Size:</label> Please enter a value like 10 not 10x10<br>
-        <input type="number" id="size" name="size" min="1" max="10" required><br><br>
+        <label for="width">Grid Width:</label><br>
+        <input type="number" id="width" name="width" min="1" max="100" required><br><br>
+
+        <label for="height">Grid Height:</label><br>
+        <input type="number" id="height" name="height" min="1" max="100" required><br><br>
 
         <button type="button" onclick="createGrid()">Create Grid</button>
 
-        <div id="grid-container"></div>
+        <div id="grid-container" class="grid-container"></div>
 
+        <input type="hidden" id="grid_data" name="grid_data">
         <input type="submit" value="Generate .gate File">
     </form>
 
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <div id="texture-modal" style="display:none;">
+        <div id="texture-list"></div>
+        <button onclick="closeModal()">Close</button>
+    </div>
+
+    <script src="/static/scripts.js"></script>
 </body>
 </html>
