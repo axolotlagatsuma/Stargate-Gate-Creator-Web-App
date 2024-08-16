@@ -1,14 +1,10 @@
-
-
+<img style="display: block; margin-left: auto; margin-right: auto;" src="./.github/assets/sgrewrittenbanner.png" title="Stargate Logo"><br>
 <div style="text-align: center;">
-<img style="display: block; margin-left: auto; margin-right: auto;" src="./.github/assets/stargatelogo.png" title="Stargate Logo"><br>
-<h1 style="text-align: center;">Stargate Gate Generator</h1><br>
-<a style="width: 150px; height: 150px;" href="https://cdn.sgrewritten.org/">Website</a><br>
+<h1>Stargate Gate Generator</h1><br>
+<a href="https://cdn.sgrewritten.org/">Website</a><br>
 <a href="">Wiki</a><br>
-<a href="">Discord</a>
-</div>
-
------------------------------------------------
+<a href="https://sgrewritten.org/discord">Discord</a>
+</div><br>
 
 An app that makes creating custom Stargate gates easier.
 
