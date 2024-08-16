@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create .gate File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Create .gate File</h1>
+    <form id="gate-form" action="/" method="POST">
+        <label for="name">Gate Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="size">Grid Size:</label> Please enter a value like 10 not 10x10<br>
+        <input type="number" id="size" name="size" min="1" max="10" required><br><br>
+
+        <button type="button" onclick="createGrid()">Create Grid</button>
+
+        <div id="grid-container"></div>
+
+        <input type="submit" value="Generate .gate File">
+    </form>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
