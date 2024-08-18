@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Your Portal</title>
+</head>
+<body>
+    <h1>Design Your Portal</h1>
+    <form method="post" action="/generate">
+        <input type="hidden" name="portal-open" value="{{ portal_open }}">
+        <input type="hidden" name="portal-closed" value="{{ portal_closed }}">
+        <input type="hidden" name="button" value="{{ button }}">
+        <input type="hidden" name="toowner" value="{{ toowner }}">
+        <input type="hidden" name="height" value="{{ height }}">
+        <input type="hidden" name="width" value="{{ width }}">
+
+        <label for="portal_name">Portal Name:</label>
+        <input type="text" name="portal_name" id="portal_name" required>
+        <br><br>
+
+        <table>
+            {% for i in range(height) %}
+                <tr>
+                    {% for j in range(width) %}
+                        <td>
+                            <select name="cell-{{ i }}-{{ j }}">
+                                {% if i == height // 2 and j == width // 2 %}
+                                    <!-- Default to portal-open material for the middle part -->
+                                    <option value="{{ portal_open }}" selected>{{ portal_open }}</option>
+                                    {% for material in materials %}
+                                        {% if material != portal_open %}
+                                            <option value="{{ material }}">{{ material }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for material in materials %}
+                                        <option value="{{ material }}">{{ material }}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <button type="submit">Generate Portal File</button>
+    </form>
+</body>
+</html>

@@ -3,44 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gate Creator</title>
-    <style>
-        /* Add your CSS here */
-        .grid-container {
-            display: grid;
-        }
-        .grid-cell {
-            width: 30px;
-            height: 30px;
-            border: 1px solid #000;
-            background-size: cover;
-        }
-    </style>
+    <title>Create Portal</title>
 </head>
 <body>
-    <form id="gate-form" action="/" method="POST">
-        <label for="name">Gate Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+    <h1>Create Your Custom Portal</h1>
+    <form method="post">
+        <label for="portal-open">Portal Open Material:</label>
+        <select name="portal-open" id="portal-open">
+            {% for material in materials %}
+                <option value="{{ material }}">{{ material }}</option>
+            {% endfor %}
+        </select>
+        <br>
 
-        <label for="width">Grid Width:</label><br>
-        <input type="number" id="width" name="width" min="1" max="100" required><br><br>
+        <label for="portal-closed">Portal Closed Material:</label>
+        <select name="portal-closed" id="portal-closed">
+            {% for material in materials %}
+                <option value="{{ material }}">{{ material }}</option>
+            {% endfor %}
+        </select>
+        <br>
 
-        <label for="height">Grid Height:</label><br>
-        <input type="number" id="height" name="height" min="1" max="100" required><br><br>
+        <label for="button">Button Material:</label>
+        <select name="button" id="button">
+            {% for button in buttons %}
+                <option value="{{ button }}">{{ button }}</option>
+            {% endfor %}
+        </select>
+        <br>
 
-        <button type="button" onclick="createGrid()">Create Grid</button>
+        <label for="toowner">Toowner:</label>
+        <select name="toowner" id="toowner">
+            {% for option in toowner_options %}
+                <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+        <br>
 
-        <div id="grid-container" class="grid-container"></div>
+        <label for="height">Portal Height:</label>
+        <input type="number" name="height" id="height" required>
+        <br>
 
-        <input type="hidden" id="grid_data" name="grid_data">
-        <input type="submit" value="Generate .gate File">
+        <label for="width">Portal Width:</label>
+        <input type="number" name="width" id="width" required>
+        <br>
+
+        <button type="submit">Next</button>
     </form>
-
-    <div id="texture-modal" style="display:none;">
-        <div id="texture-list"></div>
-        <button onclick="closeModal()">Close</button>
-    </div>
-
-    <script src="/static/scripts.js"></script>
 </body>
 </html>

@@ -2,11 +2,11 @@
 <div style="text-align: center;">
 <h1>Stargate Gate Generator</h1><br>
 <a href="https://cdn.sgrewritten.org/">Website</a><br>
-<a href="">Wiki</a><br>
+<a href=""> Wiki</a><br>
 <a href="https://sgrewritten.org/discord">Discord</a>
 </div><br>
 
-An app that makes creating custom Stargate gates easier.
+### An app that makes creating custom Stargate gates easier.
 
 ## Project Structure
 
@@ -29,5 +29,9 @@ Now we'll do ```python app.py```
 #### Step 4 - Done
 This is not actually a step xD. Now go to http://{SERVERIP}:8000 probably http://localhost:8000
 
-### To-do
-- Make the app work
+## To-do
+### Phase 1
+- Make the app work.
+
+## Contributing
+While Phase 1 is in place all help in writing code will be strongly appreciated.
